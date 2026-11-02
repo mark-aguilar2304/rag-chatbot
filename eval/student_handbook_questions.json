@@ -1,0 +1,85 @@
+{
+  "document": "data/student-handbook.pdf",
+  "questions": [
+    {
+      "question": "How many absences are allowed for a class that meets once a week?",
+      "answerable": true,
+      "expected_sections": [],
+      "expected_pages": [43],
+      "expected_terms": ["3 meetings"],
+      "reference_answer": "Three meetings for a class meeting once a week."
+    },
+    {
+      "question": "What is the maximum period for an approved leave of absence?",
+      "answerable": true,
+      "expected_sections": [],
+      "expected_pages": [43],
+      "expected_terms": ["three (3) consecutive terms"],
+      "reference_answer": "A maximum of three consecutive terms; it must be renewed before it expires."
+    },
+    {
+      "question": "If a student drops during the second week of classes, what percentage of tuition is deducted?",
+      "answerable": true,
+      "expected_sections": [],
+      "expected_pages": [55],
+      "expected_terms": ["20%"],
+      "reference_answer": "20% of total matriculation plus registration and ID fees."
+    },
+    {
+      "question": "Can a student combine a sibling discount with the 10% cash discount?",
+      "answerable": true,
+      "expected_sections": [],
+      "expected_pages": [55],
+      "expected_terms": ["only one", "not allowed"],
+      "reference_answer": "No. Only one scholarship or discount may be availed per term."
+    },
+    {
+      "question": "What CGWA must a Don Mariano F. Jhocson Gold Scholar maintain?",
+      "answerable": true,
+      "expected_sections": [],
+      "expected_pages": [57],
+      "expected_terms": ["3.50"],
+      "reference_answer": "A cumulative general weighted average of at least 3.50."
+    },
+    {
+      "question": "What is the uniform policy on Wednesdays and Saturdays?",
+      "answerable": true,
+      "expected_sections": [],
+      "expected_pages": [27],
+      "expected_terms": ["washdays", "not required"],
+      "reference_answer": "They are washdays; the prescribed uniform is not required."
+    },
+    {
+      "question": "What documents are needed to replace a lost student ID?",
+      "answerable": true,
+      "expected_sections": [],
+      "expected_pages": [26],
+      "expected_terms": ["Affidavit of Loss"],
+      "reference_answer": "The procedure includes an Affidavit of Loss and the official receipt for the replacement fee."
+    },
+    {
+      "question": "What grade range corresponds to a 2.0 or Satisfactory grade?",
+      "answerable": true,
+      "expected_sections": [],
+      "expected_pages": [36],
+      "expected_terms": ["72", "77"],
+      "reference_answer": "72 to 77 percent."
+    },
+    {
+      "question": "What is the campus Wi-Fi password?",
+      "answerable": false,
+      "expected_sections": [],
+      "expected_pages": [],
+      "expected_terms": [],
+      "reference_answer": "Not covered by this document."
+    },
+    {
+      "question": "What is the maximum class size?",
+      "answerable": false,
+      "expected_sections": [],
+      "expected_pages": [],
+      "expected_terms": [],
+      "reference_answer": "Not covered by this document."
+    }
+  ]
+}

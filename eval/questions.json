@@ -1,0 +1,75 @@
+{
+  "document": "data/sample_document.md",
+  "questions": [
+    {
+      "question": "How long must a new full-time employee wait before becoming eligible for remote work?",
+      "answerable": true,
+      "expected_sections": ["2. Eligibility"],
+      "expected_terms": ["90"],
+      "reference_answer": "90 calendar days of continuous employment."
+    },
+    {
+      "question": "What hours must remote employees be online?",
+      "answerable": true,
+      "expected_sections": ["3. Core Collaboration Hours"],
+      "expected_terms": ["10:00", "15:00"],
+      "reference_answer": "10:00 to 15:00 local time, Monday through Thursday."
+    },
+    {
+      "question": "How much is the yearly equipment stipend, and when are receipts due?",
+      "answerable": true,
+      "expected_sections": ["4. Equipment Stipend"],
+      "expected_terms": ["$600", "30 days"],
+      "reference_answer": "$600 per calendar year; itemized receipts are due within 30 days."
+    },
+    {
+      "question": "Can a contractor work remotely under this policy?",
+      "answerable": true,
+      "expected_sections": ["2. Eligibility"],
+      "expected_terms": ["not eligible"],
+      "reference_answer": "No. Contractors are not eligible for remote work."
+    },
+    {
+      "question": "How many business days can someone work from another country in a year?",
+      "answerable": true,
+      "expected_sections": ["6. Working From Another Country"],
+      "expected_terms": ["20"],
+      "reference_answer": "No more than 20 business days per calendar year."
+    },
+    {
+      "question": "What approval is needed before working abroad?",
+      "answerable": true,
+      "expected_sections": ["6. Working From Another Country"],
+      "expected_terms": ["manager", "People Operations", "30 days"],
+      "reference_answer": "Written approval from the manager and People Operations at least 30 days in advance."
+    },
+    {
+      "question": "What is the hotel limit in Tier 1 cities?",
+      "answerable": true,
+      "expected_sections": ["7. Business Travel"],
+      "expected_terms": ["$180"],
+      "reference_answer": "$180 per night."
+    },
+    {
+      "question": "I lost my phone. How quickly must I report it?",
+      "answerable": true,
+      "expected_sections": ["8. Device Security"],
+      "expected_terms": ["24 hours"],
+      "reference_answer": "Within 24 hours to the Security team."
+    },
+    {
+      "question": "How many vacation days do employees receive?",
+      "answerable": false,
+      "expected_sections": [],
+      "expected_terms": [],
+      "reference_answer": "Not covered by this document."
+    },
+    {
+      "question": "What is the parental leave policy?",
+      "answerable": false,
+      "expected_sections": [],
+      "expected_terms": [],
+      "reference_answer": "Not covered by this document."
+    }
+  ]
+}

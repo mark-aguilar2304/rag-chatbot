@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.streamlit/secrets.toml
+
+# The vector index is generated locally.
+index/
+
+# Keep the sample document, ignore user documents.
+data/*
+!data/sample_document.md
