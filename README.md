@@ -45,8 +45,9 @@ src/indexer.py             build-and-save pipeline
 scripts/build_index.py     index builder CLI
 scripts/evaluate.py        retrieval/answer smoke evaluation
 data/sample_document.md    generic demo document
-data/student-handbook.pdf  active reference document (kept local, ignored by Git)
-eval/student_handbook_questions.json  active-document evaluation set
+data/student-handbook.pdf  bundled reference document
+index/                     prebuilt index for the bundled handbook
+eval/student_handbook_questions.json  bundled-document evaluation set
 eval/questions.json        sample-document set used by the integration test
 tests/                     offline unit/integration tests
 PRODUCT.md                 product context and constraints
@@ -100,9 +101,9 @@ cp .env.example .env
 
 The defaults work with a local Ollama instance.
 
-> **This workspace:** `.env` points to `data/student-handbook.pdf`, and its index has already been
-> built. A fresh copy of `.env.example` points to the generic sample document instead. Change
-> `DOCUMENT_PATH` to choose your own file, then rebuild the index.
+> **This workspace:** `.env` points to the bundled `data/student-handbook.pdf`, and its prebuilt
+> index is included in the repository. A fresh copy of `.env.example` uses the same handbook.
+> Change `DOCUMENT_PATH` to choose your own file, then rebuild the index.
 
 ### 3. Choose an LLM
 
@@ -130,8 +131,8 @@ LLM_API_KEY=your-key-here
 ```
 
 Other providers work if they expose an OpenAI-compatible `/chat/completions` endpoint (for
-example Groq, Together, LM Studio, or a company gateway). Put the key only in `.env`; that file
-is ignored by Git. Include the `/v1` part of the base URL.
+example Groq, Together, LM Studio, or a company gateway). Put the key in `.env` locally or in
+Streamlit Cloud secrets; never commit it. Include the `/v1` part of the base URL.
 
 ### 4. Build the index
 
@@ -140,8 +141,9 @@ python -m scripts.build_index
 ```
 
 The first run downloads the embedding model from Hugging Face. Later runs use the local cache.
-The index is written to `index/` (ignored by Git). The bundled student handbook produces 383
-chunks with the default settings.
+The bundled student handbook produces 383 chunks with the default settings, and its prebuilt
+index is committed under `index/`. Rebuilding overwrites those three files; commit them if you
+change the demo document.
 
 ### 5. Run the chatbot
 
@@ -169,6 +171,25 @@ is kept for the current browser session only. Both themes are supported at deskt
 widths. At narrower widths the study desk stacks below the chat, and the reference rail becomes
 a collapsible sidebar. `New chat` clears the current conversation.
 
+## Streamlit Community Cloud
+
+The repository includes the handbook and its prebuilt index, so the app can be deployed without
+a first-run build.
+
+1. Create an app from `https://github.com/mark-aguilar2304/rag-chatbot` with branch `main` and
+   main file path `app.py`.
+2. In the app's **Settings → Secrets**, add the LLM settings using TOML:
+
+```toml
+LLM_BASE_URL = "https://your-provider.example/v1"
+LLM_MODEL = "your-model"
+LLM_API_KEY = "your-key"
+```
+
+The app reads Streamlit secrets as a fallback when the matching environment variables are not
+set. Never put the key in the repository. The first query downloads the embedding model; later
+queries use the cached model.
+
 ## Add or replace the reference document
 
 1. Put one supported file in `data/` (PDF, DOCX, TXT, `.md`).
@@ -182,9 +203,9 @@ python -m scripts.build_index
 
 4. Restart or refresh the Streamlit app.
 
-`data/*` is ignored by Git except for the sample document, so your private documents are not
-committed. If your PDF is a scan with no text layer, run OCR first; the loader reports this
-instead of pretending extraction succeeded.
+`data/*` is ignored by Git except for the bundled sample and handbook, so your private documents
+are not committed. If your PDF is a scan with no text layer, run OCR first; the loader reports
+this instead of pretending extraction succeeded.
 
 ## Configuration
 
@@ -193,7 +214,7 @@ project root when relative.
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `DOCUMENT_PATH` | `data/sample_document.md` | The single reference document. This workspace uses `data/student-handbook.pdf`. |
+| `DOCUMENT_PATH` | `data/student-handbook.pdf` | The single reference document. Bundled with the repo. |
 | `INDEX_DIR` | `index` | Generated index directory. |
 | `EMBEDDING_MODEL` | `BAAI/bge-small-en-v1.5` | Any fastembed-supported model. Rebuild after changing it. |
 | `CHUNK_SIZE` | `1200` | Target chunk size in characters. |
@@ -273,7 +294,7 @@ Start the local model (`ollama serve`), check `LLM_BASE_URL`, and make sure the 
 
 **HTTP 401/403**
 
-`LLM_API_KEY` is missing or invalid. Set it in `.env` and restart Streamlit.
+`LLM_API_KEY` is missing or invalid. Set it in `.env` or Streamlit secrets and restart the app.
 
 **`No extractable text` or OCR error**
 
@@ -297,9 +318,11 @@ cached, embedding runs locally.
 - With the default local Ollama setup, those excerpts stay on your machine. A hosted provider
   receives them and may log them under its own policy; check that policy before using sensitive
   documents.
-- API keys are read from `.env` or environment variables and are never displayed by the app.
-- `.env`, `index/`, and user documents under `data/` are ignored by Git. The local index stores
-  document excerpts in plain text so the chatbot can work offline; keep it private as well.
+- API keys are read from `.env`, environment variables, or Streamlit secrets and are never
+  displayed by the app.
+- `.env` and user documents under `data/` are ignored by Git. The bundled handbook and its index
+  are included so the public demo works out of the box; treat that content as public. The index
+  stores document excerpts in plain text.
 - Retrieved text is untrusted input. The system prompt tells the model not to follow
   instructions found in the document. This reduces prompt-injection risk but cannot eliminate
   it, especially with a weak model.

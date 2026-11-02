@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-31T04:45:05+00:00",
+  "source": {
+    "path": "C:\\Users\\Mark Aguilar\\Downloads\\rag-chatbot\\data\\student-handbook.pdf",
+    "name": "student-handbook.pdf",
+    "sha256": "21e6bf7bab6920d8368cd1d08ebae7ee135739cd1cfd5b836488beb58b781889",
+    "size": 1899126
+  },
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "chunking": {
+    "size": 1200,
+    "overlap": 200
+  },
+  "chunk_count": 383,
+  "dimension": 384
+}

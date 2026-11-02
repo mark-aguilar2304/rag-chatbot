@@ -30,7 +30,17 @@ class Settings:
 
 
 def _value(name: str, default: str) -> str:
-    return os.environ.get(name, default).strip()
+    # Environment variables win. Streamlit Community Cloud exposes its secrets
+    # through st.secrets rather than the process environment.
+    raw = os.environ.get(name)
+    if raw is None:
+        try:
+            import streamlit as st
+
+            raw = st.secrets.get(name)
+        except Exception:
+            raw = None
+    return (str(raw) if raw is not None else default).strip()
 
 
 def _path(name: str, default: str) -> Path:
@@ -71,7 +81,7 @@ def load_settings() -> Settings:
         raise ValueError("EMBEDDING_MODEL must not be empty.")
 
     return Settings(
-        document_path=_path("DOCUMENT_PATH", "data/sample_document.md"),
+        document_path=_path("DOCUMENT_PATH", "data/student-handbook.pdf"),
         index_dir=_path("INDEX_DIR", "index"),
         embedding_model=embedding_model,
         chunk_size=chunk_size,

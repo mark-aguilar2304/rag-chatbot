@@ -5,9 +5,13 @@ __pycache__/
 .env
 .streamlit/secrets.toml
 
-# The vector index is generated locally.
+# The vector index is generated locally, but the bundled handbook index is
+# committed so the Streamlit demo is ready without a rebuild.
 index/
+!index/
+!index/**
 
-# Keep the sample document, ignore user documents.
+# Keep the sample and bundled handbook, ignore other user documents.
 data/*
 !data/sample_document.md
+!data/student-handbook.pdf
